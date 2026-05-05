@@ -41,7 +41,7 @@ const tapDotCameraSizeCss = css.match(/\.tapdot-label-bubble\.has-camera \{[\s\S
 
 const requiredPolishTokens = [
   "--tapdot-pill-gap: 8px;",
-  "--tapdot-pill-padding-y: 9px;",
+  "--tapdot-pill-padding-y: 5px;",
   "--tapdot-pill-padding-left: 15px;",
   "--tapdot-pill-padding-right: 17px;",
   "gap: var(--tapdot-pill-gap);",
@@ -66,8 +66,8 @@ if (!tapDotCameraCss.includes("margin: 0;") || tapDotCameraCss.includes("margin-
   throw new Error("Tap dot camera icon must not use negative right margin; it should rely on the explicit pill gap.");
 }
 
-if (!tapDotCameraCss.includes("display: block;") || !tapDotCameraSizeCss.includes("--tapdot-camera-size: 24px;")) {
-  throw new Error("Tap dot camera icon should be a fixed 24px block inside the polished pill layout.");
+if (!tapDotCameraCss.includes("display: block;") || !tapDotCameraSizeCss.includes("--tapdot-camera-size: 28px;")) {
+  throw new Error("Tap dot camera icon should be a fixed 28px block inside the polished pill layout.");
 }
 
 if (tapDotBubbleCss.includes("min-height: 40px;")) {
@@ -77,4 +77,7 @@ if (tapDotBubbleCss.includes("min-height: 40px;")) {
 const oldEffectiveGap = 6 - 2;
 const newEffectiveGap = 8;
 const gapImprovementPct = Math.round(((newEffectiveGap - oldEffectiveGap) / oldEffectiveGap) * 100);
-console.log(`Tap dot overlay regression checks passed. Pill gap ${oldEffectiveGap}px -> ${newEffectiveGap}px (+${gapImprovementPct}%), icon 22px -> 24px, bio typography 17px/400/1.5 applied.`);
+const previousPillHeight = Math.max(24, 17 * 1.5) + 9 * 2;
+const newPillHeight = Math.max(28, 17 * 1.5) + 5 * 2;
+const heightReductionPct = Math.round((1 - newPillHeight / previousPillHeight) * 100);
+console.log(`Tap dot overlay regression checks passed. Pill gap ${oldEffectiveGap}px -> ${newEffectiveGap}px (+${gapImprovementPct}%), icon 24px -> 28px (+17%), pill height ${previousPillHeight}px -> ${newPillHeight}px (-${heightReductionPct}%).`);

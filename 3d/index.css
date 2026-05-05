@@ -729,7 +729,7 @@
 }
 .tapdot-label-bubble {
   --tapdot-pill-gap: 8px;
-  --tapdot-pill-padding-y: 9px;
+  --tapdot-pill-padding-y: 5px;
   --tapdot-pill-padding-left: 15px;
   --tapdot-pill-padding-right: 17px;
   position: absolute;
@@ -801,7 +801,7 @@
   z-index: 1;
 }
 .tapdot-label-bubble.has-camera {
-  --tapdot-camera-size: 24px;
+  --tapdot-camera-size: 28px;
 }
 .tapdot-label-bubble.icon-only {
   padding: 0;
