@@ -728,10 +728,10 @@
   z-index: 6;
 }
 .tapdot-label-bubble {
-  --tapdot-pill-gap: 10px;
-  --tapdot-pill-padding-y: 8px;
-  --tapdot-pill-padding-left: 14px;
-  --tapdot-pill-padding-right: 15px;
+  --tapdot-pill-gap: 8px;
+  --tapdot-pill-padding-y: 9px;
+  --tapdot-pill-padding-left: 15px;
+  --tapdot-pill-padding-right: 17px;
   position: absolute;
   transform: translate(-50%, -100%);
   display: inline-flex;
@@ -743,9 +743,10 @@
     "Helvetica Neue",
     Arial,
     sans-serif;
-  font-size: 14px;
-  font-weight: 560;
-  line-height: 1;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
   color: rgba(255, 255, 255, 0.95);
   white-space: nowrap;
   box-sizing: border-box;
@@ -786,7 +787,8 @@
   position: relative;
   z-index: 1;
   flex-shrink: 0;
-  line-height: 1;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
 }
 .tapdot-label-bubble .tapdot-camera-icon {
   width: var(--tapdot-camera-size, 14px);
@@ -799,7 +801,7 @@
   z-index: 1;
 }
 .tapdot-label-bubble.has-camera {
-  --tapdot-camera-size: 22px;
+  --tapdot-camera-size: 24px;
 }
 .tapdot-label-bubble.icon-only {
   padding: 0;

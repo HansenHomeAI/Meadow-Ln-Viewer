@@ -40,15 +40,16 @@ const tapDotCameraCss = css.match(/\.tapdot-label-bubble \.tapdot-camera-icon \{
 const tapDotCameraSizeCss = css.match(/\.tapdot-label-bubble\.has-camera \{[\s\S]*?\n\}/)?.[0] || "";
 
 const requiredPolishTokens = [
-  "--tapdot-pill-gap: 10px;",
-  "--tapdot-pill-padding-y: 8px;",
-  "--tapdot-pill-padding-left: 14px;",
-  "--tapdot-pill-padding-right: 15px;",
+  "--tapdot-pill-gap: 8px;",
+  "--tapdot-pill-padding-y: 9px;",
+  "--tapdot-pill-padding-left: 15px;",
+  "--tapdot-pill-padding-right: 17px;",
   "gap: var(--tapdot-pill-gap);",
   "padding: var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-right) var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-left);",
-  "font-size: 14px;",
-  "font-weight: 560;",
-  "line-height: 1;"
+  "font-size: 17px;",
+  "font-weight: 400;",
+  "line-height: 1.5;",
+  "letter-spacing: 0.2px;"
 ];
 
 for (const token of requiredPolishTokens) {
@@ -57,16 +58,16 @@ for (const token of requiredPolishTokens) {
   }
 }
 
-if (!tapDotTextCss.includes("line-height: 1;")) {
-  throw new Error("Tap dot label text must use a stable 1:1 line box for optical centering.");
+if (!tapDotTextCss.includes("line-height: 1.5;") || !tapDotTextCss.includes("letter-spacing: 0.2px;")) {
+  throw new Error("Tap dot label text must match the bio copy line-height and letter spacing.");
 }
 
 if (!tapDotCameraCss.includes("margin: 0;") || tapDotCameraCss.includes("margin-right: -2px;")) {
   throw new Error("Tap dot camera icon must not use negative right margin; it should rely on the explicit pill gap.");
 }
 
-if (!tapDotCameraCss.includes("display: block;") || !tapDotCameraSizeCss.includes("--tapdot-camera-size: 22px;")) {
-  throw new Error("Tap dot camera icon should be a fixed 22px block inside the polished pill layout.");
+if (!tapDotCameraCss.includes("display: block;") || !tapDotCameraSizeCss.includes("--tapdot-camera-size: 24px;")) {
+  throw new Error("Tap dot camera icon should be a fixed 24px block inside the polished pill layout.");
 }
 
 if (tapDotBubbleCss.includes("min-height: 40px;")) {
@@ -74,6 +75,6 @@ if (tapDotBubbleCss.includes("min-height: 40px;")) {
 }
 
 const oldEffectiveGap = 6 - 2;
-const newEffectiveGap = 10;
+const newEffectiveGap = 8;
 const gapImprovementPct = Math.round(((newEffectiveGap - oldEffectiveGap) / oldEffectiveGap) * 100);
-console.log(`Tap dot overlay regression checks passed. Pill gap ${oldEffectiveGap}px -> ${newEffectiveGap}px (+${gapImprovementPct}%), icon margin-right -2px -> 0px, padding L/R 14px/15px.`);
+console.log(`Tap dot overlay regression checks passed. Pill gap ${oldEffectiveGap}px -> ${newEffectiveGap}px (+${gapImprovementPct}%), icon 22px -> 24px, bio typography 17px/400/1.5 applied.`);
