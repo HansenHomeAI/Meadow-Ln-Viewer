@@ -40,13 +40,13 @@ const tapDotCameraCss = css.match(/\.tapdot-label-bubble \.tapdot-camera-icon \{
 const tapDotCameraSizeCss = css.match(/\.tapdot-label-bubble\.has-camera \{[\s\S]*?\n\}/)?.[0] || "";
 
 const requiredPolishTokens = [
-  "--tapdot-pill-gap: 8px;",
-  "--tapdot-pill-padding-y: 5px;",
-  "--tapdot-pill-padding-left: 15px;",
-  "--tapdot-pill-padding-right: 17px;",
+  "--tapdot-pill-gap: 7.2px;",
+  "--tapdot-pill-padding-y: 4.5px;",
+  "--tapdot-pill-padding-left: 13.5px;",
+  "--tapdot-pill-padding-right: 15.3px;",
   "gap: var(--tapdot-pill-gap);",
   "padding: var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-right) var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-left);",
-  "font-size: 17px;",
+  "font-size: 14.45px;",
   "font-weight: 400;",
   "line-height: 1.5;",
   "letter-spacing: 0.2px;"
@@ -66,8 +66,8 @@ if (!tapDotCameraCss.includes("margin: 0;") || tapDotCameraCss.includes("margin-
   throw new Error("Tap dot camera icon must not use negative right margin; it should rely on the explicit pill gap.");
 }
 
-if (!tapDotCameraCss.includes("display: block;") || !tapDotCameraSizeCss.includes("--tapdot-camera-size: 28px;")) {
-  throw new Error("Tap dot camera icon should be a fixed 28px block inside the polished pill layout.");
+if (!tapDotCameraCss.includes("display: block;") || !tapDotCameraSizeCss.includes("--tapdot-camera-size: 29.4px;")) {
+  throw new Error("Tap dot camera icon should be a fixed 29.4px block inside the polished pill layout.");
 }
 
 if (tapDotBubbleCss.includes("min-height: 40px;")) {
@@ -75,9 +75,9 @@ if (tapDotBubbleCss.includes("min-height: 40px;")) {
 }
 
 const oldEffectiveGap = 6 - 2;
-const newEffectiveGap = 8;
+const currentGap = 8;
+const newEffectiveGap = 7.2;
 const gapImprovementPct = Math.round(((newEffectiveGap - oldEffectiveGap) / oldEffectiveGap) * 100);
-const previousPillHeight = Math.max(24, 17 * 1.5) + 9 * 2;
-const newPillHeight = Math.max(28, 17 * 1.5) + 5 * 2;
-const heightReductionPct = Math.round((1 - newPillHeight / previousPillHeight) * 100);
-console.log(`Tap dot overlay regression checks passed. Pill gap ${oldEffectiveGap}px -> ${newEffectiveGap}px (+${gapImprovementPct}%), icon 24px -> 28px (+17%), pill height ${previousPillHeight}px -> ${newPillHeight}px (-${heightReductionPct}%).`);
+const edgeTighteningPct = Math.round((1 - 7.2 / currentGap) * 100);
+const verticalPaddingTighteningPct = Math.round((1 - 4.5 / 5) * 100);
+console.log(`Tap dot overlay regression checks passed. Gap ${currentGap}px -> ${newEffectiveGap}px (-${edgeTighteningPct}%), edge padding tightened 10%, vertical padding 5px -> 4.5px (-${verticalPaddingTighteningPct}%), icon 28px -> 29.4px (+5%), font 17px -> 14.45px (-15%).`);
