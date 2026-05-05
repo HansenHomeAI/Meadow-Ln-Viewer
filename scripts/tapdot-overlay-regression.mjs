@@ -35,19 +35,45 @@ if (!source.includes("maxDistance: 50") || !source.includes("maxRadiusFromOrigin
 }
 
 const tapDotBubbleCss = css.match(/\.tapdot-label-bubble \{[\s\S]*?\n\}/)?.[0] || "";
+const tapDotTextCss = css.match(/\.tapdot-label-text \{[\s\S]*?\n\}/)?.[0] || "";
 const tapDotCameraCss = css.match(/\.tapdot-label-bubble \.tapdot-camera-icon \{[\s\S]*?\n\}/)?.[0] || "";
 const tapDotCameraSizeCss = css.match(/\.tapdot-label-bubble\.has-camera \{[\s\S]*?\n\}/)?.[0] || "";
 
-if (!tapDotBubbleCss.includes("gap: 6px;") || !tapDotBubbleCss.includes("padding: 7px 12px;")) {
-  throw new Error("Tap dot pills should keep the original compact spacing.");
+const requiredPolishTokens = [
+  "--tapdot-pill-gap: 10px;",
+  "--tapdot-pill-padding-y: 8px;",
+  "--tapdot-pill-padding-left: 14px;",
+  "--tapdot-pill-padding-right: 15px;",
+  "gap: var(--tapdot-pill-gap);",
+  "padding: var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-right) var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-left);",
+  "font-size: 14px;",
+  "font-weight: 560;",
+  "line-height: 1;"
+];
+
+for (const token of requiredPolishTokens) {
+  if (!tapDotBubbleCss.includes(token)) {
+    throw new Error(`Tap dot pills must include polished spacing token: ${token}`);
+  }
+}
+
+if (!tapDotTextCss.includes("line-height: 1;")) {
+  throw new Error("Tap dot label text must use a stable 1:1 line box for optical centering.");
+}
+
+if (!tapDotCameraCss.includes("margin: 0;") || tapDotCameraCss.includes("margin-right: -2px;")) {
+  throw new Error("Tap dot camera icon must not use negative right margin; it should rely on the explicit pill gap.");
+}
+
+if (!tapDotCameraCss.includes("display: block;") || !tapDotCameraSizeCss.includes("--tapdot-camera-size: 22px;")) {
+  throw new Error("Tap dot camera icon should be a fixed 22px block inside the polished pill layout.");
 }
 
 if (tapDotBubbleCss.includes("min-height: 40px;")) {
   throw new Error("Tap dot pills should not force the larger polished height.");
 }
 
-if (!tapDotCameraCss.includes("margin-right: -2px;") || !tapDotCameraSizeCss.includes("--tapdot-camera-size: 24px;")) {
-  throw new Error("Tap dot camera icon spacing should match the original compact pill layout.");
-}
-
-console.log("Tap dot overlay regression checks passed.");
+const oldEffectiveGap = 6 - 2;
+const newEffectiveGap = 10;
+const gapImprovementPct = Math.round(((newEffectiveGap - oldEffectiveGap) / oldEffectiveGap) * 100);
+console.log(`Tap dot overlay regression checks passed. Pill gap ${oldEffectiveGap}px -> ${newEffectiveGap}px (+${gapImprovementPct}%), icon margin-right -2px -> 0px, padding L/R 14px/15px.`);

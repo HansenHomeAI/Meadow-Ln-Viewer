@@ -728,19 +728,24 @@
   z-index: 6;
 }
 .tapdot-label-bubble {
+  --tapdot-pill-gap: 10px;
+  --tapdot-pill-padding-y: 8px;
+  --tapdot-pill-padding-left: 14px;
+  --tapdot-pill-padding-right: 15px;
   position: absolute;
   transform: translate(-50%, -100%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 7px 12px;
+  gap: var(--tapdot-pill-gap);
+  padding: var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-right) var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-left);
   font-family:
     "Helvetica Neue",
     Arial,
     sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 560;
+  line-height: 1;
   color: rgba(255, 255, 255, 0.95);
   white-space: nowrap;
   box-sizing: border-box;
@@ -781,20 +786,20 @@
   position: relative;
   z-index: 1;
   flex-shrink: 0;
+  line-height: 1;
 }
 .tapdot-label-bubble .tapdot-camera-icon {
   width: var(--tapdot-camera-size, 14px);
   height: var(--tapdot-camera-size, 14px);
   object-fit: contain;
+  display: block;
   flex-shrink: 0;
-  margin-top: calc((1em - var(--tapdot-camera-size, 14px)) / 2 - 0.5px);
-  margin-bottom: calc((1em - var(--tapdot-camera-size, 14px)) / 2 + 0.5px);
-  margin-right: -2px;
+  margin: 0;
   position: relative;
   z-index: 1;
 }
 .tapdot-label-bubble.has-camera {
-  --tapdot-camera-size: 24px;
+  --tapdot-camera-size: 22px;
 }
 .tapdot-label-bubble.icon-only {
   padding: 0;
