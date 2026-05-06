@@ -729,9 +729,9 @@
 }
 .tapdot-label-bubble {
   --tapdot-pill-gap: 7.2px;
-  --tapdot-pill-padding-y: 4.5px;
-  --tapdot-pill-padding-left: 13.5px;
-  --tapdot-pill-padding-right: 15.3px;
+  --tapdot-pill-padding-y: 4.25px;
+  --tapdot-pill-padding-left: 12.75px;
+  --tapdot-pill-padding-right: 14.45px;
   position: absolute;
   transform: translate(-50%, -100%);
   display: inline-flex;

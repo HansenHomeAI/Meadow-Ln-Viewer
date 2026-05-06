@@ -41,9 +41,9 @@ const tapDotCameraSizeCss = css.match(/\.tapdot-label-bubble\.has-camera \{[\s\S
 
 const requiredPolishTokens = [
   "--tapdot-pill-gap: 7.2px;",
-  "--tapdot-pill-padding-y: 4.5px;",
-  "--tapdot-pill-padding-left: 13.5px;",
-  "--tapdot-pill-padding-right: 15.3px;",
+  "--tapdot-pill-padding-y: 4.25px;",
+  "--tapdot-pill-padding-left: 12.75px;",
+  "--tapdot-pill-padding-right: 14.45px;",
   "gap: var(--tapdot-pill-gap);",
   "padding: var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-right) var(--tapdot-pill-padding-y) var(--tapdot-pill-padding-left);",
   "font-size: 14.45px;",
@@ -79,5 +79,6 @@ const currentGap = 8;
 const newEffectiveGap = 7.2;
 const gapImprovementPct = Math.round(((newEffectiveGap - oldEffectiveGap) / oldEffectiveGap) * 100);
 const edgeTighteningPct = Math.round((1 - 7.2 / currentGap) * 100);
-const verticalPaddingTighteningPct = Math.round((1 - 4.5 / 5) * 100);
-console.log(`Tap dot overlay regression checks passed. Gap ${currentGap}px -> ${newEffectiveGap}px (-${edgeTighteningPct}%), edge padding tightened 10%, vertical padding 5px -> 4.5px (-${verticalPaddingTighteningPct}%), icon 28px -> 29.4px (+5%), font 17px -> 14.45px (-15%).`);
+const edgePaddingTighteningPct = Math.round((1 - 12.75 / 15) * 100);
+const verticalPaddingTighteningPct = Math.round((1 - 4.25 / 5) * 100);
+console.log(`Tap dot overlay regression checks passed. Gap ${currentGap}px -> ${newEffectiveGap}px (-${edgeTighteningPct}%), edge padding 15px/17px -> 12.75px/14.45px (-${edgePaddingTighteningPct}%), vertical padding 5px -> 4.25px (-${verticalPaddingTighteningPct}%), icon 28px -> 29.4px (+5%), font 17px -> 14.45px (-15%).`);
